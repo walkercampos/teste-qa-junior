@@ -9,16 +9,18 @@ O projeto é organizado da seguinte forma:
 ```
 robot-web-tests
 ├── tests
-│   ├── 1-alterar_parametro_para_s.robot    #  Teste alterar valor para S
-│   └── 2-alterar_parametro_para_n.robot    # Teste alterar valor para N
+│   ├── 1-alterar_parametro_para_s.robot    # Teste alterar valor para S
+│   ├── 2-alterar_parametro_para_n.robot    # Teste alterar valor para N
+│   └── paciente
+│       └── paciente.siga.robot             # Teste de cadastro e edição de paciente via SIGA
 ├── resources
-│   └── keywords.robot           # Palavras-chave reutilizáveis
+│   └── keywords.robot                      # Palavras-chave reutilizáveis
 ├── variables
-│   └── variables.robot          # Variáveis globais do projeto
+│   └── variables.robot                     # Variáveis globais do projeto
 ├── libs
-│   └── custom_library.py        # Biblioteca personalizada em Python
-├── requirements.txt             # Dependências do projeto
-└── README.md                    # Documentação do projeto
+│   └── custom_library.py                   # Biblioteca personalizada em Python
+├── requirements.txt                        # Dependências do projeto
+└── README.md                               # Documentação do projeto
 ```
  
 
@@ -42,6 +44,7 @@ robot-web-tests
 - Acessar Outros Módulos > Configuração > Sistema > Parâmetros de Sistema
 - Em Parâmetros de Sistema pesquisar por **Nome do Parâmetro**: P_SGH_TOTEN_IMPRESSAO
 - Editar o campo **Valor Texto** para *S* e depois *N*
+- Realizar cadastro e edição de paciente via SIGA (ver pasta `paciente`)
 
 ---
 
@@ -77,6 +80,13 @@ flowchart LR
     alterado --x|nao| erro:::vermelho
     classDef vermelho stroke:#f00
 
+   Novo fluxo para paciente.siga.robot
+    login paciente-siga@-->|sim| paciente-siga[paciente.siga]
+    paciente-siga@{ animate: true }
+    paciente-siga cadastro@--> cadastro{cadastro}
+    cadastro@{ animate: true }
+    cadastro sucesso@-->|sim| sucesso
+    cadastro --x|nao| erro
 ```
 
 --- 
